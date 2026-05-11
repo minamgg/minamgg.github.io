@@ -66,6 +66,32 @@ Then refresh the browser.
 
 Do not edit `assets/site-data.js` directly because it is generated from the CSV files.
 
+## How To Add New Content
+
+Add new records by appending rows to the relevant CSV file. Keep the existing header row unchanged.
+
+- New publication: add one row to `data/publications/publications.csv`. Use a new numeric `id`; fill `status`, journal fields, title, authors, keywords, abstract, citation, and notes where available.
+- New funded project or appointment: add one row to `data/profile/experience_projects.csv`. Use `Category` values such as `Funded Project` or `Work Experience`.
+- New academic service item: add one row to `data/profile/academic_service.csv`.
+- New education record: add one row to `data/profile/education.csv`.
+- New award or honor: add one row to `data/awards/awards.csv`.
+- New contact or profile link: add one row to `data/profile/links.csv`. Use `placement` values such as `profile`, `footer`, or `footer,nav`.
+- Profile text changes: edit the relevant key in `data/profile/profile.csv`.
+
+After editing any CSV file, regenerate the website data:
+
+```powershell
+.\update-site-data.ps1
+```
+
+Then preview locally:
+
+```powershell
+python -m http.server 8000
+```
+
+Open `http://127.0.0.1:8000/` and refresh the page. Commit both the CSV changes and the regenerated `assets/site-data.js`.
+
 ## Visual and Interaction Edits
 
 - Page layout, CSS, and modal markup live in `index.html`.
